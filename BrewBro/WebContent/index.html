@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>index</title>
+		<meta name="viewport" content="width=device-width; initial-scale=1.0" />
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0-rc.2/jquery.mobile-1.1.0-rc.2.min.css" />
+		<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+		<script src="http://code.jquery.com/mobile/1.1.0-rc.2/jquery.mobile-1.1.0-rc.2.min.js"></script>
+		<script src="scripts/beercalcs.js"></script>
+		<script src="scripts/brewbro.js"></script>
+		<link rel="stylesheet" href="stylesheets/brewbro.css" />
+	</head>
+	<body>
+		<div data-role="page" id="page1">
+			<div data-theme="a" data-role="header">
+				<h3> BrewBro </h3>
+			</div>
+			<div data-role="content">
+				<ul data-role="listview" data-divider-theme="b" data-inset="true">
+					<li data-role="list-divider" role="heading">
+						Divider
+					</li>
+					<li data-theme="c">
+						<a href="#convert" data-transition="slide"> Convert </a>
+					</li>
+					<li data-theme="c">
+						<a href="#hydro" data-transition="slide"> Hydrometer </a>
+					</li>
+					<li data-theme="c">
+						<a href="#refract" data-transition="slide"> Refractometer </a>
+					</li>
+					<li data-theme="c">
+						<a href="#yeast" data-transition="slide"> Yeast </a>
+					</li>
+					<li data-theme="c">
+						<a href="#carb" data-transition="slide"> Carbonation </a>
+					</li>
+					<li data-theme="c">
+						<a href="#water" data-transition="slide"> Water </a>
+					</li>
+					<li data-role="list-divider" role="heading">
+						Divider
+					</li>
+					<li data-theme="c">
+						<a href="#about" data-transition="slide"> About </a>
+					</li>
+				</ul>
+			</div>
+			<div data-theme="a" data-role="footer" data-position="fixed">
+				<h2> Footer </h2>
+			</div>
+		</div>
+		<!-- Conversion Page -->
+		<div data-role="page" id="convert">
+			<div data-theme="a" data-role="header">
+				<h3> BrewBro </h3>
+				<a data-role="button" data-transition="fade" href="#page1" data-icon="arrow-l" data-iconpos="left"> Back </a>
+			</div>
+			<div data-role="content">
+				<div data-role="fieldcontain">
+					<label for="selectmenu1"> Convert: </label>
+					<select name="convertmenu" id="convertmenu">
+						<option value="sgToPlato"> SG &gt; Plato </option>
+						<option value="platoToSg"> Plato &gt; SG </option>
+						<option value="fToC"> F &gt; C </option>
+						<option value="cToF"> C &gt; F </option>
+					</select>
+				</div>
+				<div data-role="fieldcontain">
+					<fieldset data-role="controlgroup">
+						<label for="in" id="in-label">SG</label>
+						<input id="in" placeholder="" value="1.050" type="range" min="1.000" max="1.130" step="0.001"/>
+					</fieldset>
+				</div>
+				<div data-role="fieldcontain">
+					<fieldset data-role="controlgroup">
+						<label for="out" id="outLabel">Plato</label>
+						<input id="out" placeholder="1" value="" type="text" />
+					</fieldset>
+				</div>
+			</div>
+			<div data-theme="a" data-role="footer" data-position="fixed">
+				<h3></h3>
+				<a data-role="button" data-transition="pop" href="#page1" data-icon="info" data-iconpos="left"> Help </a>
+			</div>
+		</div>
+		<script>//App custom javascript</script>
+	</body>
