@@ -1,89 +1,581 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<title>index</title>
-		<meta name="viewport" content="width=device-width; initial-scale=1.0" />
-		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0-rc.2/jquery.mobile-1.1.0-rc.2.min.css" />
-		<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-		<script src="http://code.jquery.com/mobile/1.1.0-rc.2/jquery.mobile-1.1.0-rc.2.min.js"></script>
-		<script src="scripts/beercalcs.js"></script>
-		<script src="scripts/brewbro.js"></script>
-		<link rel="stylesheet" href="stylesheets/brewbro.css" />
-	</head>
-	<body>
-		<div data-role="page" id="page1">
-			<div data-theme="a" data-role="header">
-				<h3> BrewBro </h3>
-			</div>
-			<div data-role="content">
-				<ul data-role="listview" data-divider-theme="b" data-inset="true">
-					<li data-role="list-divider" role="heading">
-						Divider
-					</li>
-					<li data-theme="c">
-						<a href="#convert" data-transition="slide"> Convert </a>
-					</li>
-					<li data-theme="c">
-						<a href="#hydro" data-transition="slide"> Hydrometer </a>
-					</li>
-					<li data-theme="c">
-						<a href="#refract" data-transition="slide"> Refractometer </a>
-					</li>
-					<li data-theme="c">
-						<a href="#yeast" data-transition="slide"> Yeast </a>
-					</li>
-					<li data-theme="c">
-						<a href="#carb" data-transition="slide"> Carbonation </a>
-					</li>
-					<li data-theme="c">
-						<a href="#water" data-transition="slide"> Water </a>
-					</li>
-					<li data-role="list-divider" role="heading">
-						Divider
-					</li>
-					<li data-theme="c">
-						<a href="#about" data-transition="slide"> About </a>
-					</li>
-				</ul>
-			</div>
-			<div data-theme="a" data-role="footer" data-position="fixed">
-				<h2> Footer </h2>
-			</div>
-		</div>
-		<!-- Conversion Page -->
-		<div data-role="page" id="convert">
-			<div data-theme="a" data-role="header">
-				<h3> BrewBro </h3>
-				<a data-role="button" data-transition="fade" href="#page1" data-icon="arrow-l" data-iconpos="left"> Back </a>
-			</div>
-			<div data-role="content">
-				<div data-role="fieldcontain">
-					<label for="selectmenu1"> Convert: </label>
-					<select name="convertmenu" id="convertmenu">
-						<option value="sgToPlato"> SG &gt; Plato </option>
-						<option value="platoToSg"> Plato &gt; SG </option>
-						<option value="fToC"> F &gt; C </option>
-						<option value="cToF"> C &gt; F </option>
-					</select>
-				</div>
-				<div data-role="fieldcontain">
-					<fieldset data-role="controlgroup">
-						<label for="in" id="in-label">SG</label>
-						<input id="in" placeholder="" value="1.050" type="range" min="1.000" max="1.130" step="0.001"/>
-					</fieldset>
-				</div>
-				<div data-role="fieldcontain">
-					<fieldset data-role="controlgroup">
-						<label for="out" id="outLabel">Plato</label>
-						<input id="out" placeholder="1" value="" type="text" />
-					</fieldset>
-				</div>
-			</div>
-			<div data-theme="a" data-role="footer" data-position="fixed">
-				<h3></h3>
-				<a data-role="button" data-transition="pop" href="#page1" data-icon="info" data-iconpos="left"> Help </a>
-			</div>
-		</div>
-		<script>//App custom javascript</script>
-	</body>
+    <head>
+        <meta charset="utf-8" />
+        <title>index</title>
+        <meta name="viewport" content="width=device-width; initial-scale=1.0" />
+        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0-rc.2/jquery.mobile-1.1.0-rc.2.min.css" />
+        <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+        <script src="http://code.jquery.com/mobile/1.1.0-rc.2/jquery.mobile-1.1.0-rc.2.min.js"></script>
+        <script src="scripts/beercalcs.js"></script>
+        <script src="scripts/brewbro.js"></script>
+        <link rel="stylesheet" href="stylesheets/brewbro.css" />
+    </head>
+    <body>
+        <div data-role="page" id="main_page">
+            <div data-theme="a" data-role="header">
+                <h3> BrewBro </h3>
+            </div>
+            <div data-role="content">
+                <ul data-role="listview" data-divider-theme="b" data-inset="true">
+                    <li data-role="list-divider" role="heading">
+                        Divider
+                    </li>
+                    <li data-theme="c">
+                        <a href="#convert" data-transition="slide"> Convert </a>
+                    </li>
+                    <li data-theme="c">
+                        <a href="#hydro" data-transition="slide"> Hydrometer </a>
+                    </li>
+                    <li data-theme="c">
+                        <a href="#refract" data-transition="slide"> Refractometer </a>
+                    </li>
+                    <li data-theme="c">
+                        <a href="#yeast" data-transition="slide"> Yeast </a>
+                    </li>
+                    <li data-theme="c">
+                        <a href="#carb" data-transition="slide"> Carbonation </a>
+                    </li>
+                    <li data-theme="c">
+                        <a href="#water" data-transition="slide"> Water </a>
+                    </li>
+                    <li data-role="list-divider" role="heading">
+                        Divider
+                    </li>
+                    <li data-theme="c">
+                        <a href="#about" data-transition="slide"> About </a>
+                    </li>
+                </ul>
+            </div>
+            <div data-theme="a" data-role="footer" data-position="fixed">
+                <h2> Footer </h2>
+            </div>
+        </div>
+        <!-- Conversion Page -->
+        <div data-role="page" id="convert">
+            <div data-theme="a" data-role="header">
+                <h3> Convert </h3>
+                <a data-role="button" data-transition="fade" href="#main_page" data-icon="arrow-l" data-iconpos="left"> Back </a>
+            </div>
+            <div data-role="content">
+                <div data-role="fieldcontain">
+                    <label for="selectmenu1"> Convert: </label>
+                    <select name="convertmenu" id="convertmenu">
+                        <option value="sgToPlato"> SG &gt; Plato </option>
+                        <option value="platoToSg"> Plato &gt; SG </option>
+                        <option value="fToC"> F &gt; C </option>
+                        <option value="cToF"> C &gt; F </option>
+                    </select>
+                </div>
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup">
+                        <label for="in" id="in-label">SG</label>
+                        <input id="in" placeholder="" value="1.050" type="range" min="1.000" max="1.130" step="0.001"/>
+                    </fieldset>
+                </div>
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup">
+                        <label for="out" id="outLabel">Plato</label>
+                        <input id="out" placeholder="1" value="" type="text" />
+                    </fieldset>
+                </div>
+            </div>
+            <div data-theme="a" data-role="footer" data-position="fixed">
+                <h3>sb</h3>
+                <a data-role="button" data-transition="pop" href="#main_page" data-icon="info" data-iconpos="left"> Help </a>
+            </div>
+        </div>
+       
+        <!-- Hydrometer Page -->
+        <div data-role="page" id="hydro">
+            <div data-theme="a" data-role="header">
+                <h3> Hydrometer </h3>                
+                <a data-role="button" data-transition="fade" href="#main_page" data-icon="arrow-l" data-iconpos="left"> Back </a>
+            </div>
+            <div data-role="content">
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+                        <legend>
+                            Temp Units:
+                        </legend>
+                        <input name="hydr_tmp_u" id="hydr_tmp_u_f" value="f" type="radio" checked="true"/>
+                        <label for="hydr_tmp_u_f"> F </label>
+                        <input name="hydr_tmp_u" id="hydr_tmp_u_c" value="c" type="radio" />
+                        <label for="hydr_tmp_u_c"> C </label>
+                    </fieldset>
+                </div>
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup">
+                        <label for="hydr_sg"> SG reading: </label>
+                        <input id="hydr_sg" placeholder="" value="1.050" type="range" min="1.000" max="1.130" step="0.001"/>
+                    </fieldset>
+                </div>
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup">
+                        <label for="hydr_tmp"> Temp of reading: </label>
+                        <input id="hydr_tmp" placeholder="" value="68" type="number" />
+                    </fieldset>
+                </div>
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup">
+                        <label for="callib_tmp"> Hydrometer callibration temp: </label>
+                        <input id="callib_tmp" placeholder="" value="68" type="number" />
+                    </fieldset>
+                </div>
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup">
+                        <label for="correct_sg"> Corrected value: </label>
+                        <input id="correct_sg" placeholder="" value="1.050" type="text" />
+                    </fieldset>
+                </div>
+            </div>
+            <div data-theme="a" data-role="footer" data-position="fixed">
+                <h3> Footer </h3>
+            </div>
+        </div>
+
+        <!-- Yeast page -->
+        <div data-role="page" id="yeast">
+            <div data-theme="a" data-role="header">
+                <h3> Yeast </h3>
+                <a data-role="button" data-transition="fade" href="#main_page" data-icon="arrow-l" data-iconpos="left"> Back </a>
+            </div>
+            <div data-role="content">
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup" data-type="horizontal">
+                        <legend>
+                            Yeast Type
+                        </legend>
+                        <input name="radiobuttons1" id="radio1" value="ale" type="radio" />
+                        <label for="radio1"> Ale </label>
+                        <input name="radiobuttons1" id="radio2" value="lager" type="radio" />
+                        <label for="radio2"> Lager </label>
+                    </fieldset>
+                </div>
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <div data-role="fieldcontain">
+                            <fieldset data-role="controlgroup">
+                                <label for="textinput6"> Wort Volume </label>
+                                <input id="textinput6" placeholder="" value="" type="number" />
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="ui-block-b">
+                        <div data-role="fieldcontain">
+                            <label for="selectmenu1"> Units </label>
+                            <select name="selectmenu1" id="selectmenu1">
+                                <option value="galus"> Gal US </option>
+                                <option value="galimp"> Gal IMP </option>
+                                <option value="l"> litres </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup">
+                        <label for="textinput1"> Wort OG </label>
+                        <input id="textinput1" placeholder="" value="1.050" type="number" />
+                    </fieldset>
+                </div>
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup">
+                        <label for="textinput2"> Temp of reading: </label>
+                        <input id="textinput2" placeholder="" value="68" type="number" />
+                    </fieldset>
+                </div>
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup">
+                        <label for="textinput3"> Yeast cells (billions): </label>
+                        <input id="textinput3" placeholder="" value="68" type="text" />
+                    </fieldset>
+                </div>
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup">
+                        <label for="textinput5"> Grams of dry yeast: </label>
+                        <input id="textinput5" placeholder="" value="1" type="text" />
+                    </fieldset>
+                </div>
+            </div>
+            <div data-theme="a" data-role="footer" data-position="fixed">
+                <h3> Footer </h3>
+            </div>
+        </div>
+                
+        <!--  Refractometer -->
+        <div data-role="page" id="refract">
+            <div data-theme="a" data-role="header">
+                <h3>
+                    Refractometer Tools
+                </h3>
+                <a data-role="button" data-transition="fade" href="#main_page" data-icon="arrow-l" data-iconpos="left"> Back </a>
+            </div>
+            <div data-role="content">
+                <div data-role="collapsible-set" data-theme="" data-content-theme="">
+                    <div data-role="collapsible" data-collapsed="false">
+                        <h3>
+                            Brix to SG
+                        </h3>
+                        <div data-role="fieldcontain">
+                            <fieldset data-role="controlgroup">
+                                <label for="textinput1">
+                                    Brix
+                                </label>
+                                <input id="textinput1" placeholder="" value="12.5" type="range" />
+                            </fieldset>
+                        </div>
+                        <div data-role="fieldcontain">
+                            <fieldset data-role="controlgroup">
+                                <label for="textinput2">
+                                    SG
+                                </label>
+                                <input id="textinput2" placeholder="" value="1.050" type="text" />
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div data-role="collapsible" data-collapsed="true">
+                        <h3>
+                            FG from Brix
+                        </h3>
+                        <div data-role="fieldcontain">
+                            <fieldset data-role="controlgroup">
+                                <label for="textinput3">
+                                    Original Brix
+                                </label>
+                                <input id="textinput3" placeholder="" value="" type="range" />
+                            </fieldset>
+                        </div>
+                        <div data-role="fieldcontain">
+                            <fieldset data-role="controlgroup">
+                                <label for="textinput4">
+                                    Current Brix
+                                </label>
+                                <input id="textinput4" placeholder="" value="" type="text" />
+                            </fieldset>
+                        </div>
+                        <div data-role="fieldcontain">
+                            <fieldset data-role="controlgroup">
+                                <label for="textinput5">
+                                    Current SG
+                                </label>
+                                <input id="textinput5" placeholder="" value="" type="text" />
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div data-role="collapsible" data-collapsed="true">
+                        <h3>
+                            ABV
+                        </h3>
+                        <div data-role="fieldcontain">
+                            <fieldset data-role="controlgroup">
+                                <label for="textinput6">
+                                    Current Brix
+                                </label>
+                                <input id="textinput6" placeholder="" value="5" type="range" />
+                            </fieldset>
+                        </div>
+                        <div data-role="fieldcontain">
+                            <fieldset data-role="controlgroup">
+                                <label for="textinput7">
+                                    Current SG
+                                </label>
+                                <input id="textinput7" placeholder="" value="1.030" type="range" />
+                            </fieldset>
+                        </div>
+                        <div data-role="fieldcontain">
+                            <fieldset data-role="controlgroup">
+                                <label for="textinput8">
+                                    Current ABV
+                                </label>
+                                <input id="textinput8" placeholder="" value="" type="text" />
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div data-theme="a" data-role="footer" data-position="fixed">
+                <h3>
+                    Footer
+                </h3>
+            </div>
+        </div>
+        
+        <!-- Carbonation -->
+         <div data-role="page" id="carb">
+            <div data-theme="a" data-role="header">
+                <h3>
+                    Carbonation
+                </h3>
+                <a data-role="button" data-transition="fade" href="#main_page" data-icon="arrow-l" data-iconpos="left"> Back </a>
+            </div>
+            <div data-role="content">
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup" data-mini="true">
+                        <label for="textinput9">
+                            Target vols CO2:
+                        </label>
+                        <input id="textinput9" placeholder="" value="" type="range" />
+                    </fieldset>
+                </div>
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup" data-mini="true">
+                        <label for="textinput10">
+                            Serving Temp
+                        </label>
+                        <input id="textinput10" placeholder="" value="" type="text" />
+                    </fieldset>
+                </div>
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+                        <legend>
+                            Temp Units:
+                        </legend>
+                        <input name="radiobuttons1" id="radio1" value="c" type="radio" />
+                        <label for="radio1">
+                            C
+                        </label>
+                        <input name="radiobuttons1" id="radio2" value="f" type="radio" />
+                        <label for="radio2">
+                            F
+                        </label>
+                    </fieldset>
+                </div>
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup" data-mini="true">
+                        <label for="textinput11">
+                            Keg PSI:
+                        </label>
+                        <input id="textinput11" placeholder="" value="" type="text" />
+                    </fieldset>
+                </div>
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup" data-mini="true">
+                        <label for="textinput12">
+                            Temp at bottling:
+                        </label>
+                        <input id="textinput12" placeholder="" value="" type="text" />
+                    </fieldset>
+                </div>
+                <div data-role="fieldcontain">
+                    <label for="selectmenu1">
+                        Priming sugar:
+                    </label>
+                    <select name="selectmenu1" id="selectmenu1" data-mini="true">
+                        <option value="dextrose">
+                            dextrose
+                        </option>
+                        <option value="tablesugar">
+                            table sugar
+                        </option>
+                        <option value="brownsugar">
+                            brown sugar
+                        </option>
+                    </select>
+                </div>
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup" data-mini="true">
+                        <label for="textinput14">
+                            Beer volume:
+                        </label>
+                        <input id="textinput14" placeholder="" value="" type="text" />
+                    </fieldset>
+                </div>
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup">
+                        <label for="textinput15">
+                            Disolved CO2:
+                        </label>
+                        <input id="textinput15" placeholder="" value="" type="text" />
+                    </fieldset>
+                </div>
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup">
+                        <label for="textinput16">
+                            Weight (g) to add:
+                        </label>
+                        <input id="textinput16" placeholder="" value="" type="text" />
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+        
+        <!--  Water -->
+         <div data-role="page" id="water">
+            <div data-theme="a" data-role="header">
+                <h3>
+                    Header
+                </h3>
+                <a data-role="button" data-transition="fade" href="#main_page" data-icon="arrow-l" data-iconpos="left"> Back </a>
+            </div>
+            <div data-role="content">
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <div data-role="fieldcontain">
+                            <fieldset data-role="controlgroup">
+                                <label for="textinput1">
+                                    Volume:
+                                </label>
+                                <input id="textinput1" placeholder="" value="" type="number" />
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="ui-block-b">
+                        <div data-role="fieldcontain">
+                            <label for="selectmenu1">
+                            </label>
+                            <select name="selectmenu1" id="selectmenu1">
+                                <option value="option1">
+                                    Option 1
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="ui-block-a">
+                        <div data-role="fieldcontain">
+                            <label for="selectmenu2">
+                                Source
+                            </label>
+                            <select name="selectmenu2" id="selectmenu2">
+                                <option value="option1">
+                                    Option 1
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="ui-block-b">
+                        <div data-role="fieldcontain">
+                            <label for="selectmenu3">
+                                Target
+                            </label>
+                            <select name="selectmenu3" id="selectmenu3">
+                                <option value="option1">
+                                    Option 1
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui-grid-c">
+                    <div class="ui-block-a">
+                    </div>
+                    <div class="ui-block-b">
+                        <div>
+                            <b>
+                                Source
+                                <br />
+                                <br />
+                            </b>
+                        </div>
+                    </div>
+                    <div class="ui-block-c">
+                        <div>
+                            <b>
+                                Target
+                                <br />
+                                <br />
+                            </b>
+                        </div>
+                    </div>
+                    <div class="ui-block-d">
+                        <div>
+                            <b>
+                                Treated
+                                <br />
+                                <br />
+                            </b>
+                        </div>
+                    </div>
+                    <div class="ui-block-a">
+                        <div>
+                            <b>
+                                Ca
+                                <br />
+                                <br />
+                            </b>
+                        </div>
+                    </div>
+                    <div class="ui-block-b">
+                        <div data-role="fieldcontain">
+                            <fieldset data-role="controlgroup" data-mini="true">
+                                <label for="textinput2">
+                                </label>
+                                <input id="textinput2" placeholder="" value="" type="text" />
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="ui-block-c">
+                        <div data-role="fieldcontain">
+                            <fieldset data-role="controlgroup" data-mini="true">
+                                <label for="textinput3">
+                                </label>
+                                <input id="textinput3" placeholder="" value="" type="text" />
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="ui-block-d">
+                        <div data-role="fieldcontain">
+                            <fieldset data-role="controlgroup" data-mini="true">
+                                <label for="textinput4">
+                                </label>
+                                <input id="textinput4" placeholder="" value="" type="text" />
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="ui-block-a">
+                        <div>
+                            <b>
+                                SO4
+                                <br />
+                                <br />
+                            </b>
+                        </div>
+                    </div>
+                    <div class="ui-block-b">
+                    </div>
+                    <div class="ui-block-c">
+                    </div>
+                    <div class="ui-block-d">
+                    </div>
+                    <div class="ui-block-a">
+                        <div>
+                            <b>
+                                Mg
+                                <br />
+                                <br />
+                            </b>
+                        </div>
+                    </div>
+                    <div class="ui-block-b">
+                    </div>
+                    <div class="ui-block-c">
+                    </div>
+                    <div class="ui-block-d">
+                    </div>
+                    <div class="ui-block-a">
+                    </div>
+                    <div class="ui-block-b">
+                    </div>
+                    <div class="ui-block-c">
+                    </div>
+                    <div class="ui-block-d">
+                    </div>
+                    <div class="ui-block-a">
+                    </div>
+                    <div class="ui-block-b">
+                    </div>
+                    <div class="ui-block-c">
+                    </div>
+                    <div class="ui-block-d">
+                    </div>
+                </div>
+            </div>
+            <div data-theme="a" data-role="footer" data-position="fixed">
+                <h3>
+                    Footer
+                </h3>
+            </div>
+        </div>
+        
+        <script>//App custom javascript</script>
+    </body>
+</html>

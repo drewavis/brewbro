@@ -1,4 +1,5 @@
 
 /* BrewBro css */
 
-#in {width:100px;}
+input.ui-slider-input, .ui-field-contain input.ui-slider-input {width:100px;}
+/* #in {width:100px;} */

@@ -1,6 +1,44 @@
 // Get doc ready, add all onchange events
 $(document).ready(
+		
+
 		function() {
+			
+			/* Hyrdometer page functions */
+			    $('input:radio[name=hydr_tmp_u]').change( function() {
+			      var temp = $('#hydr_tmp').val();
+			      var ctemp = $('#callib_tmp').val();
+			      var tempU = $('input:radio[name=hydr_tmp_u]:checked').val();
+
+			      if (tempU == 'c') {
+			        temp = fToC(temp);
+			        ctemp = fToC(ctemp);     
+
+			      } else {
+			        temp = cToF(temp);
+			        ctemp = cToF(ctemp);
+			      }
+			      $('#hydr_tmp').val(Math.round(temp* 10)/ 10);
+			      $('#callib_tmp').val(Math.round(ctemp* 10)/ 10);
+
+			    });
+
+$('#hydr_sg').change(
+		function(){
+			var sg = $('#hydr_sg').val();
+			var tempU = $('input:radio[name=hydr_tmp_u]:checked').val();
+			var temp = $('#hydr_tmp').val();
+			var ctemp = $('#callib_tmp').val();
+			if (tempU == 'f'){
+				temp = cToF(temp);
+		        ctemp = cToF(ctemp);
+			}
+			var corrected_sg = hydrometerCorrection(temp, sg, ctemp);
+			$('#correct_sg').val(corrected_sg);
+			
+		});  
+			    
+			
 			$("#in").change(
 					function(event){
 						calculate();
@@ -72,7 +110,6 @@ $(document).ready(
 					        break;
 					    }
 					     calculate();
-
 					});
 		});
 

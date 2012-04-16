@@ -188,18 +188,7 @@ var weights = {
 	'lb' : 1
 };
 
-function convertToLb(unit, amount) {
-	var ret = amount / weights[unit];
-	return ret;
-}
-
-function convertToOz(unit, amount) {
-	var ret = amount / weights[unit]; // convert to lb
-	ret *= weights['oz']; // convert to oz
-	return ret;
-}
-
-function convertWgtTo(from, to, amount) {	
+function convertWgtTo(from, to, amount) {
 	return amount * weights[to] / weights[from];
 }
 
@@ -209,12 +198,51 @@ var volumes = {
 	'qt' : 4
 };
 
-function convertToGal(unit, amount) {
-	return amount / volumes[unit];
-}
-
 function convertTo(from, to, amount) {
 	return amount * volumes[to] / volumes[from];
+};
+
+// hydrometer correction formula based on post by AJ DeLange in HBD 3701
+
+function deltaSG(TempC, SG) {
+	var coeffic = new Array();
+	coeffic[0]= [ 56.084, -0.17885, -0.13063 ]; // 0 - 4.99
+	coeffic[1]=[ 69.685, -1.367, -0.10621 ]; // 5 - 9.99
+	coeffic[2]=[ 77.782, -1.7288, -0.10822 ]; // 10 - 14.99
+	coeffic[3]=[ 87.895, -2.3601, -0.10285 ]; // 15 - 19.99
+	coeffic[4]=[ 97.052, -2.7729, -0.10596 ] ; // 20 - 24.99
+	plato = sgToPlato(SG);
+	coefficIndex = 4;
+	if (plato < 20)
+		coefficIndex = 3;
+	else {
+		if (plato < 15)
+			coefficIndex = 2;
+		else if (plato < 10)
+			coefficIndex = 1;
+		else if (plato < 5)
+			coefficIndex = 0;
+	}
+
+	var dSG = (coeffic[coefficIndex][0]) + (coeffic[coefficIndex][1] * TempC)
+			+ (coeffic[coefficIndex][2] * TempC * TempC);
+
+	// changed + to - from original
+	CorrectedSG = platoToSG(plato - (dSG / 100));
+	return CorrectedSG;
+};
+
+function hydrometerCorrection(tempC, SG, refTempC) {
+	// tempC = float(tempC);
+	// SG = float(SG);
+	// refTempC = float(refTempC);
+	correctedSG = 0;
+	if (refTempC == 20.0)
+		correctedSG = deltaSG(tempC, SG);
+	else
+		correctedSG = SG * deltaSG(tempC, SG) / deltaSG(refTempC, SG);
+
+	return correctedSG;
 }
 
 /*
