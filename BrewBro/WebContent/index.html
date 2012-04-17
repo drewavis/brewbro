@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title>index</title>
+        <title>BrewBro</title>
         <meta name="viewport" content="width=device-width; initial-scale=1.0" />
         <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0-rc.2/jquery.mobile-1.1.0-rc.2.min.css" />
         <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
@@ -98,7 +98,7 @@
                         <legend>
                             Temp Units:
                         </legend>
-                        <input name="hydr_tmp_u" id="hydr_tmp_u_f" value="f" type="radio" checked="true"/>
+                        <input name="hydr_tmp_u" id="hydr_tmp_u_f" value="f" type="radio" checked="checked"/>
                         <label for="hydr_tmp_u_f"> F </label>
                         <input name="hydr_tmp_u" id="hydr_tmp_u_c" value="c" type="radio" />
                         <label for="hydr_tmp_u_c"> C </label>
@@ -146,26 +146,26 @@
                         <legend>
                             Yeast Type
                         </legend>
-                        <input name="radiobuttons1" id="radio1" value="ale" type="radio" />
-                        <label for="radio1"> Ale </label>
-                        <input name="radiobuttons1" id="radio2" value="lager" type="radio" />
-                        <label for="radio2"> Lager </label>
+                        <input name="rdo_yeasttype" id="ale" value="ale" type="radio" checked="checked" />
+                        <label for="ale"> Ale </label>
+                        <input name="rdo_yeasttype" id="lager" value="lager" type="radio" />
+                        <label for="lager"> Lager </label>
                     </fieldset>
                 </div>
                 <div class="ui-grid-a">
                     <div class="ui-block-a">
                         <div data-role="fieldcontain">
                             <fieldset data-role="controlgroup">
-                                <label for="textinput6"> Wort Volume </label>
-                                <input id="textinput6" placeholder="" value="" type="number" />
+                                <label for="yeast_wortvol"> Wort Volume </label>
+                                <input id="yeast_wortvol" placeholder="" value="5" type="range" min="1" max="1000" step="1"/>
                             </fieldset>
                         </div>
                     </div>
                     <div class="ui-block-b">
                         <div data-role="fieldcontain">
-                            <label for="selectmenu1"> Units </label>
-                            <select name="selectmenu1" id="selectmenu1">
-                                <option value="galus"> Gal US </option>
+                            <label for="yeast_units"> Units </label>
+                            <select name="yeast_units" id="yeast_units">
+                                <option value="gal"> Gal US </option>
                                 <option value="galimp"> Gal IMP </option>
                                 <option value="l"> litres </option>
                             </select>
@@ -174,26 +174,26 @@
                 </div>
                 <div data-role="fieldcontain">
                     <fieldset data-role="controlgroup">
-                        <label for="textinput1"> Wort OG </label>
-                        <input id="textinput1" placeholder="" value="1.050" type="number" />
+                        <label for="yeast_og"> Wort OG </label>
+                        <input id="yeast_og" placeholder="" value="1.050" type="range" min="1" max="1.130" step="0.001"/>
                     </fieldset>
                 </div>
                 <div data-role="fieldcontain">
                     <fieldset data-role="controlgroup">
-                        <label for="textinput2"> Temp of reading: </label>
-                        <input id="textinput2" placeholder="" value="68" type="number" />
+                        <label for="yeast_count"> Yeast cells (billions): </label>
+                        <input id="yeast_count" placeholder="" value="68" type="text" readonly="readonly"/>
                     </fieldset>
                 </div>
                 <div data-role="fieldcontain">
                     <fieldset data-role="controlgroup">
-                        <label for="textinput3"> Yeast cells (billions): </label>
-                        <input id="textinput3" placeholder="" value="68" type="text" />
+                        <label for="yeast_gr"> Grams of dry yeast: </label>
+                        <input id="yeast_gr" placeholder="" value="1" type="text" readonly="readonly"/>
                     </fieldset>
                 </div>
                 <div data-role="fieldcontain">
                     <fieldset data-role="controlgroup">
-                        <label for="textinput5"> Grams of dry yeast: </label>
-                        <input id="textinput5" placeholder="" value="1" type="text" />
+                        <label for="yeast_l"> Litres of yeast slurry: </label>
+                        <input id="yeast_l" placeholder="" value="1" type="text" readonly="readonly"/>
                     </fieldset>
                 </div>
             </div>
@@ -218,47 +218,47 @@
                         </h3>
                         <div data-role="fieldcontain">
                             <fieldset data-role="controlgroup">
-                                <label for="textinput1">
+                                <label for="ref_brix">
                                     Brix
                                 </label>
-                                <input id="textinput1" placeholder="" value="12.5" type="range" />
+                                <input id="ref_brix" placeholder="" value="12.5" type="range" min="1" max="20" step="0.5"/>
                             </fieldset>
                         </div>
                         <div data-role="fieldcontain">
                             <fieldset data-role="controlgroup">
-                                <label for="textinput2">
+                                <label for="ref_sg">
                                     SG
                                 </label>
-                                <input id="textinput2" placeholder="" value="1.050" type="text" />
+                                <input id="ref_sg" placeholder="" value="1.050" type="text" readonly="readonly"/>
                             </fieldset>
                         </div>
                     </div>
                     <div data-role="collapsible" data-collapsed="true">
                         <h3>
-                            FG from Brix
+                            SG from Brix
                         </h3>
                         <div data-role="fieldcontain">
                             <fieldset data-role="controlgroup">
-                                <label for="textinput3">
+                                <label for="ref_og_brix">
                                     Original Brix
                                 </label>
-                                <input id="textinput3" placeholder="" value="" type="range" />
+                                <input id="ref_og_brix" placeholder="" value="12" type="range" min="1" max="20" step="0.1"/>
                             </fieldset>
                         </div>
                         <div data-role="fieldcontain">
                             <fieldset data-role="controlgroup">
-                                <label for="textinput4">
+                                <label for="ref_curr_brix">
                                     Current Brix
                                 </label>
-                                <input id="textinput4" placeholder="" value="" type="text" />
+                                <input id="ref_curr_brix" placeholder="" value="5" type="range" min="1" max="20" step="0.1" />
                             </fieldset>
                         </div>
                         <div data-role="fieldcontain">
                             <fieldset data-role="controlgroup">
-                                <label for="textinput5">
+                                <label for="ref_curr_sg">
                                     Current SG
                                 </label>
-                                <input id="textinput5" placeholder="" value="" type="text" />
+                                <input id="ref_curr_sg" placeholder="" value="1.012" type="text" readonly="readonly"/>
                             </fieldset>
                         </div>
                     </div>
@@ -268,26 +268,26 @@
                         </h3>
                         <div data-role="fieldcontain">
                             <fieldset data-role="controlgroup">
-                                <label for="textinput6">
+                                <label for="ref_abv_cbrix">
                                     Current Brix
                                 </label>
-                                <input id="textinput6" placeholder="" value="5" type="range" />
+                                <input id="ref_abv_cbrix" placeholder="" value="5" type="range" min="1" max="20" step="0.1"/>
                             </fieldset>
                         </div>
                         <div data-role="fieldcontain">
                             <fieldset data-role="controlgroup">
-                                <label for="textinput7">
+                                <label for="ref_abv_csg">
                                     Current SG
                                 </label>
-                                <input id="textinput7" placeholder="" value="1.030" type="range" />
+                                <input id="ref_abv_csg" placeholder="" value="1.030" type="range" min="1" max="1.130" step="0.001"/>
                             </fieldset>
                         </div>
                         <div data-role="fieldcontain">
                             <fieldset data-role="controlgroup">
-                                <label for="textinput8">
+                                <label for="ref_abv_abv">
                                     Current ABV
                                 </label>
-                                <input id="textinput8" placeholder="" value="" type="text" />
+                                <input id="ref_abv_abv" placeholder="" value="5" type="text" readonly="readonly"/>
                             </fieldset>
                         </div>
                     </div>

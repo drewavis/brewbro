@@ -1,6 +1,5 @@
-/*!
- * Beercalcs script
- * 
+/* Beercalcs script - an interesting collection of homebrewing-related
+ * calculations.
  */
 
 function cToF(tempC) {
@@ -38,6 +37,38 @@ function brixToSG(brix) {
 	return sg;
 }
 
+function brixToFG(ob, fb) {
+	var fg = 1.001843 - 0.002318474 * ob - 0.000007775 * ob * ob - 0.000000034
+			* ob * ob * ob + 0.00574 * fb + 0.00003344 * fb * fb + 0.000000086
+			* fb * fb * fb;
+	return fg;
+}
+
+function SGBrixToABV(sg, fb) {
+	var ri = 1.33302 + 0.001427193 * fb + 0.000005791157 * fb * fb;
+	var abw = 1017.5596 - (277.4 * sg) + ri * ((937.8135 * ri) - 1805.1228);
+	var abv = abw * 1.25;
+	return abv;
+}
+
+/* yeast calcs */
+
+function yeastPitch(type, volml, sg) {
+
+	var plato = sgToPlato(sg);
+	var cells = 750000 * volml * plato;
+	if (type == 'lager')
+		cells = cells * 2;
+
+	var dryGr = cells / 17500000000;
+	cells = Math.round(cells / 1000000000);
+	return {
+		'cells' : cells,
+		'drygr' : dryGr
+	};
+}
+
+/* colour */
 function calcColour(lov, method) {
 	var colour = 0;
 	if (method == "ebc") {
@@ -195,7 +226,9 @@ function convertWgtTo(from, to, amount) {
 var volumes = {
 	'gal' : 1,
 	'l' : 3.785411,
-	'qt' : 4
+	'qt' : 4,
+	'ml' : 3785.411,
+	'galimp' : 0.832674
 };
 
 function convertTo(from, to, amount) {
@@ -206,37 +239,34 @@ function convertTo(from, to, amount) {
 
 function deltaSG(TempC, SG) {
 	var coeffic = new Array();
-	coeffic[0]= [ 56.084, -0.17885, -0.13063 ]; // 0 - 4.99
-	coeffic[1]=[ 69.685, -1.367, -0.10621 ]; // 5 - 9.99
-	coeffic[2]=[ 77.782, -1.7288, -0.10822 ]; // 10 - 14.99
-	coeffic[3]=[ 87.895, -2.3601, -0.10285 ]; // 15 - 19.99
-	coeffic[4]=[ 97.052, -2.7729, -0.10596 ] ; // 20 - 24.99
-	plato = sgToPlato(SG);
-	coefficIndex = 4;
-	if (plato < 20)
+	coeffic[0] = [ 56.084, -0.17885, -0.13063 ]; // 0 - 4.99
+	coeffic[1] = [ 69.685, -1.367, -0.10621 ]; // 5 - 9.99
+	coeffic[2] = [ 77.782, -1.7288, -0.10822 ]; // 10 - 14.99
+	coeffic[3] = [ 87.895, -2.3601, -0.10285 ]; // 15 - 19.99
+	coeffic[4] = [ 97.052, -2.7729, -0.10596 ]; // 20 - 24.99
+	var plato = sgToPlato(SG);
+	// Default, > 20:
+	var coefficIndex = 4;
+	if (plato < 5)
+		coefficIndex = 0;
+	else if (plato < 10)
+		coefficIndex = 1;
+	else if (plato < 15)
+		coefficIndex = 2;
+	else if (plato < 20)
 		coefficIndex = 3;
-	else {
-		if (plato < 15)
-			coefficIndex = 2;
-		else if (plato < 10)
-			coefficIndex = 1;
-		else if (plato < 5)
-			coefficIndex = 0;
-	}
 
 	var dSG = (coeffic[coefficIndex][0]) + (coeffic[coefficIndex][1] * TempC)
 			+ (coeffic[coefficIndex][2] * TempC * TempC);
 
 	// changed + to - from original
-	CorrectedSG = platoToSG(plato - (dSG / 100));
-	return CorrectedSG;
+	var correctedSG = platoToSG(plato - (dSG / 100));
+	return correctedSG;
 };
 
 function hydrometerCorrection(tempC, SG, refTempC) {
-	// tempC = float(tempC);
-	// SG = float(SG);
-	// refTempC = float(refTempC);
-	correctedSG = 0;
+
+	var correctedSG = 0;
 	if (refTempC == 20.0)
 		correctedSG = deltaSG(tempC, SG);
 	else
