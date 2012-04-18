@@ -68,6 +68,50 @@ function yeastPitch(type, volml, sg) {
 	};
 }
 
+/* Carbonation calcs */
+function dissolvedCO2(BottleTemp) {
+	// returns the amount of dissolved CO2 in beer at BottleTemp
+	var DisCO2 = (1.266789 * BottleTemp)
+			+ 31.00342576
+			- (0.0000009243372 * (Math.sqrt((1898155717178 * Math.pow(
+					BottleTemp, 2))
+					+ 91762600000000
+					* BottleTemp
+					+ 839352900000000
+					- 1710565000000 * 14.5)));
+	return DisCO2;
+}
+
+function kegPSI(Temp, VolsCO2) {
+	// returns the PSI needed to carbonate beer at Temp at VolsCO2
+	PSI = -16.6999 - (0.0101059 * Temp) + (0.00116512 * Math.pow(Temp, 2))
+			+ (0.173354 * Temp * VolsCO2) + (4.24267 * VolsCO2)
+			- (0.0684226 * Math.pow(VolsCO2, 2));
+	return PSI;
+}
+
+sugars = {
+	'dextrose' : 1.15,
+	'honey' : 1.40,
+	'maplesyrup' : 1.50,
+	'molasses' : 1.8,
+	'DME' : 1.3,
+	'LME' : 1.4,
+	'brownsugar' : 1,
+	'tablesugar' : 1
+};
+function PrimingSugarGL(DisVolsCO2, TargetVolsCO2, SugarType) {
+	// returns the priming sugar in grams/litre needed to
+	// carbonate beer w/ a dissolved vols CO2 to reach the target vols CO2
+	// based on an article by Dave Draper in the July/August 1996 issue of
+	// Brewing Techniques.
+
+	var GramsPerLitre = (TargetVolsCO2 - DisVolsCO2) / 0.286;
+	GramsPerLitre *= sugars[SugarType];
+
+	return GramsPerLitre;
+}
+
 /* colour */
 function calcColour(lov, method) {
 	var colour = 0;

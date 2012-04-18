@@ -1,44 +1,11 @@
-// Get doc ready, add all onchange events
-$(document).ready(
+/* brewbro.js:
+ * Functions using jquery to handle change events on the brewbro UI.
+ * Supporting calculations are in beercalcs.js.
+ */
 
-function() {
-	
-	/* Yeast page change events */
-	$('#rdo_yeasttype, #yeast_wortvol, #yeast_units, #yeast_og, #yeast_temp').change(function() {
-		var type = $('input:radio[name=rdo_yeasttype]:checked').val();		
-		var wortvol = $('#yeast_wortvol').val();
-		var units = $('#yeast_units').val();
-		var og = $('#yeast_og').val();
-	
-		var volml = convertTo(units,'ml', wortvol);
-		
-		var ret = yeastPitch(type,volml,og);
-		 $('#yeast_count').val(ret['cells']);		
-		 $('#yeast_gr').val(Math.round(ret['drygr']*10)/10);	
-	});
+// Set up onchange events.  jquery mobile uses doc.init() rather than document.ready()
 
-	/* Refractometer page change events */
-	
-	$('#ref_abv_cbrix, #ref_abv_csg').change(function() {
-		var c_brix = $('#ref_abv_cbrix').val();
-		var c_csg = $('#ref_abv_csg').val();
-		var abv = SGBrixToABV(c_csg,c_brix);
-		 $('#ref_abv_abv').val(Math.round(abv*10)/10);		
-	});
-	
-	$('#ref_og_brix, #ref_curr_brix').change(function() {
-		var og_brix = $('#ref_og_brix').val();
-		var curr_brix = $('#ref_curr_brix').val();
-		var sg = brixToFG(og_brix,curr_brix);
-		 $('#ref_curr_sg').val(Math.round(sg*1000)/1000);		
-	});
-	
-	$('#ref_brix').change(function() {
-		var brix = $('#ref_brix').val();
-		var sg = brixToSG(brix);
-		 $('#ref_sg').val(Math.round(sg*1000)/1000);		
-	});
-	
+$('#hydro').live('pageinit', function(event) {
 	/* Hyrdometer page change events */
 	$('input:radio[name=hydr_tmp_u]').change(function() {
 		var temp = $('#hydr_tmp').val();
@@ -68,10 +35,72 @@ function() {
 			ctemp = fToC(ctemp);
 		}
 		var corrected_sg = hydrometerCorrection(temp, sg, ctemp);
-		$('#correct_sg').val(Math.round(corrected_sg *1000) / 1000);
+		$('#correct_sg').val(Math.round(corrected_sg * 1000) / 1000);
 
 	});
+});
 
+$('#yeast')
+		.live(
+				'pageinit',
+				function(event) {
+					/* Yeast page change events */
+					$(
+							'#rdo_yeasttype, #yeast_wortvol, #yeast_units, #yeast_og, #yeast_temp')
+							.change(
+									function() {
+										var type = $(
+												'input:radio[name=rdo_yeasttype]:checked')
+												.val();
+										var wortvol = $('#yeast_wortvol').val();
+										var units = $('#yeast_units').val();
+										var og = $('#yeast_og').val();
+
+										var volml = convertTo(units, 'ml',
+												wortvol);
+
+										var ret = yeastPitch(type, volml, og);
+										$('#yeast_count').val(ret['cells']);
+										$('#yeast_gr')
+												.val(
+														Math
+																.round(ret['drygr'] * 10) / 10);
+										$("#yeast_tubes")
+												.val(
+														Math
+																.round(ret['cells'] / 100 + 0.5));
+										$("#yeast_l")
+												.val(
+														Math
+																.round(ret['cells'] / 1.2) / 100);
+									});
+				});
+
+$('#refract').live('pageinit', function(event) {
+	/* Refractometer page change events */
+
+	$('#ref_abv_cbrix, #ref_abv_csg').change(function() {
+		var c_brix = $('#ref_abv_cbrix').val();
+		var c_csg = $('#ref_abv_csg').val();
+		var abv = SGBrixToABV(c_csg, c_brix);
+		$('#ref_abv_abv').val(Math.round(abv * 10) / 10);
+	});
+
+	$('#ref_og_brix, #ref_curr_brix').change(function() {
+		var og_brix = $('#ref_og_brix').val();
+		var curr_brix = $('#ref_curr_brix').val();
+		var sg = brixToFG(og_brix, curr_brix);
+		$('#ref_curr_sg').val(Math.round(sg * 1000) / 1000);
+	});
+
+	$('#ref_brix').change(function() {
+		var brix = $('#ref_brix').val();
+		var sg = brixToSG(brix);
+		$('#ref_sg').val(Math.round(sg * 1000) / 1000);
+	});
+});
+
+$('#convert').live('pageinit', function(event) {
 	/* Conversion page change events */
 	$("#in").change(function(event) {
 		calculate();
@@ -144,6 +173,7 @@ function() {
 		calculate();
 	});
 });
+
 
 /* Conversion page support functions */
 function calculate() {
