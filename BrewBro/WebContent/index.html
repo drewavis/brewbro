@@ -6,14 +6,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet"href="stylesheets/jquery.mobile-1.1.0.min.css" />
         <link rel="stylesheet" href="stylesheets/brewbro.css" />
-        
         <!-- For web-based:
         <link rel="stylesheet"href="http://code.jquery.com/mobile/1.1.0-rc.2/jquery.mobile-1.1.0-rc.2.min.css" />
         <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
         <script	src="http://code.jquery.com/mobile/1.1.0-rc.2/jquery.mobile-1.1.0-rc.2.min.js"></script>
         -->
-        
-        
         <!-- PhoneGap js: -->
         <!-- <script type="text/javascript" charset="utf-8" src="scripts/cordova-1.6.0.js"></script>
         -->
@@ -333,7 +330,7 @@
             </div>
         </div>
         <!-- Carbonation -->
-        <div data-role="page" id="carb">
+        <div data-role="page" id="carb" >
             <div data-theme="a" data-role="header">
                 <h3>Carbonation</h3>
                 <a data-role="button" data-transition="fade" href="#main_page"
@@ -344,15 +341,8 @@
                     <fieldset data-role="controlgroup" data-mini="true">
                         <label for="carb_targ_vols"> Target vols CO2: </label>
                         <input
-                        id="carb_targ_vols" placeholder="" value="" type="range" min="0"
-                        max="5" step="0.1" />
-                    </fieldset>
-                </div>
-                <div data-role="fieldcontain">
-                    <fieldset data-role="controlgroup" data-mini="true">
-                        <label for="carb_serv_temp"> Serving Temp </label>
-                        <input
-                        id="carb_serv_temp" placeholder="" value="" type="number" />
+                        id="carb_targ_vols" placeholder="" value="2.4" type="range" min="1"
+                        max="4" step="0.1" />
                     </fieldset>
                 </div>
                 <div data-role="fieldcontain">
@@ -361,28 +351,43 @@
                         <legend>
                             Temp Units:
                         </legend>
-                        <input name="carb_temp_u" id="c" value="c" type="radio" />
+                        <input name="carb_temp_u" id="carb_c" value="c" type="radio" />
                         <label
-                        for="c"> C </label>
-                        <input name="carb_temp_u" id="f" value="f"
+                        for="carb_c"> C </label>
+                        <input name="carb_temp_u" id="carb_f" value="f"
                         type="radio" checked="checked" />
-                        <label for="f"> F </label>
+                        <label for="carb_f"> F </label>
                     </fieldset>
                 </div>
                 <div data-role="fieldcontain">
                     <fieldset data-role="controlgroup" data-mini="true">
-                        <label for="carb_kegpsi"> Keg PSI: </label>
-                        <input id="carb_kegpsi"
-                        placeholder="" value="" type="text" />
+                        <label for="carb_serv_temp"> Serving Temp </label>
+                        <input
+                        id="carb_serv_temp" placeholder="" value="50" type="number" />
                     </fieldset>
                 </div>
                 <div data-role="fieldcontain">
                     <fieldset data-role="controlgroup" data-mini="true">
                         <label for="carb_bottletemp"> Temp at bottling: </label>
                         <input
-                        id="carb_bottletemp" placeholder="" value="" type="text" />
+                        id="carb_bottletemp" placeholder="" value="50" type="number" />
                     </fieldset>
                 </div>
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup" data-mini="true">
+                        <label for="carb_co2"> Disolved CO2: </label>
+                        <input
+                        id="carb_co2" placeholder="" value="" type="text" />
+                    </fieldset>
+                </div>
+                <div data-role="fieldcontain" data-theme="b">
+                    <fieldset data-role="controlgroup" data-mini="true" >
+                        <label for="carb_kegpsi"> Keg PSI: </label>
+                        <input id="carb_kegpsi"
+                        placeholder="" value="15" type="text" readonly="readonly" />
+                    </fieldset>
+                </div>
+                
                 <div data-role="fieldcontain">
                     <label for="carb_sugar"> Priming sugar: </label>
                     <select
@@ -396,25 +401,34 @@
                         <option value="maplesyrup">maple syrup</option>
                     </select>
                 </div>
-                <div data-role="fieldcontain">
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <div data-role="fieldcontain">
+                            <fieldset data-role="controlgroup">
+                                <label for="carb_beervol"> Beer Volume </label>
+                                <input
+                                id="carb_beervol" placeholder="" value="5" type="range" min="1"
+                                max="100" step="1" />
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="ui-block-b">
+                        <div data-role="fieldcontain">
+                            <label for="carb_beervol_u"> Units </label>
+                            <select
+                            name="carb_beervol_u" id="carb_beervol_u">
+                                <option value="gal">Gal US</option>
+                                <option value="galimp">Gal IMP</option>
+                                <option value="l">litres</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div data-role="fieldcontain" data-theme="e" >
                     <fieldset data-role="controlgroup" data-mini="true">
-                        <label for="carb_vol"> Beer volume: </label>
-                        <input
-                        id="carb_vol" placeholder="" value="5" type="text" />
-                    </fieldset>
-                </div>
-                <div data-role="fieldcontain">
-                    <fieldset data-role="controlgroup">
-                        <label for="carb_co2"> Disolved CO2: </label>
-                        <input
-                        id="carb_co2" placeholder="" value="" type="text" />
-                    </fieldset>
-                </div>
-                <div data-role="fieldcontain">
-                    <fieldset data-role="controlgroup">
                         <label for="carb_sugarg"> Weight (g) to add: </label>
                         <input
-                        id="carb_sugarg" placeholder="" value="" type="text" />
+                        id="carb_sugarg" placeholder="" value="" type="text" readonly="readonly" />
                     </fieldset>
                 </div>
             </div>
@@ -553,7 +567,7 @@
                     <div class="ui-block-c"></div>
                     <div class="ui-block-d"></div>
                     <div class="ui-block-a"></div>
-                    <div class="ui-block-b"></div> 
+                    <div class="ui-block-b"></div>
                     <div class="ui-block-c"></div>
                     <div class="ui-block-d"></div>
                 </div>
