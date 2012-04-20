@@ -387,7 +387,6 @@
                         placeholder="" value="15" type="text" readonly="readonly" />
                     </fieldset>
                 </div>
-                
                 <div data-role="fieldcontain">
                     <label for="carb_sugar"> Priming sugar: </label>
                     <select
@@ -445,37 +444,36 @@
                     <div class="ui-block-a">
                         <div data-role="fieldcontain">
                             <fieldset data-role="controlgroup">
-                                <label for="textinput1"> Volume: </label>
-                                <input id="textinput1"
-                                placeholder="" value="" type="number" />
+                                <label for="water_vol"> Water Volume </label>
+                                <input
+                                id="water_vol" placeholder="" value="5" type="range" min="1"
+                                max="100" step="1" />
                             </fieldset>
                         </div>
                     </div>
                     <div class="ui-block-b">
                         <div data-role="fieldcontain">
-                            <label for="selectmenu1"> </label>
-                            <select name="selectmenu1"
-                            id="selectmenu1">
-                                <option value="option1">Option 1</option>
+                            <label for="water_vol_u"> Units </label>
+                            <select
+                            name="water_vol_u" id="carb_beervol_u">
+                                <option value="gal">Gal US</option>
+                                <option value="galimp">Gal IMP</option>
+                                <option value="l">litres</option>
                             </select>
                         </div>
                     </div>
                     <div class="ui-block-a">
                         <div data-role="fieldcontain">
-                            <label for="selectmenu2"> Source </label>
+                            <label for="water_src"> Source </label>
                             <select
-                            name="selectmenu2" id="selectmenu2">
-                                <option value="option1">Option 1</option>
-                            </select>
+                            name="water_src" id="water_src"></select>
                         </div>
                     </div>
                     <div class="ui-block-b">
                         <div data-role="fieldcontain">
-                            <label for="selectmenu3"> Target </label>
+                            <label for="water_targ"> Target </label>
                             <select
-                            name="selectmenu3" id="selectmenu3">
-                                <option value="option1">Option 1</option>
-                            </select>
+                            name="water_targ" id="water_targ"></select>
                         </div>
                     </div>
                 </div>
@@ -483,93 +481,175 @@
                     <div class="ui-block-a"></div>
                     <div class="ui-block-b">
                         <div>
-                            <b> Source
-                            <br />
-                            <br />
-                            </b>
+                            <b> Source </b>
                         </div>
                     </div>
                     <div class="ui-block-c">
                         <div>
-                            <b> Target
-                            <br />
-                            <br />
-                            </b>
+                            <b> Target </b>
                         </div>
                     </div>
                     <div class="ui-block-d">
                         <div>
-                            <b> Treated
-                            <br />
-                            <br />
-                            </b>
+                            <b> Treated </b>
                         </div>
                     </div>
                     <div class="ui-block-a">
                         <div>
-                            <b> Ca
-                            <br />
-                            <br />
-                            </b>
+                            <b> Ca </b>
                         </div>
                     </div>
                     <div class="ui-block-b">
                         <div data-role="fieldcontain">
                             <fieldset data-role="controlgroup" data-mini="true">
-                                <label for="textinput2"> </label>
-                                <input id="textinput2"
-                                placeholder="" value="" type="text" />
+                                <input id="ca_src"  value="" type="text" />
                             </fieldset>
                         </div>
                     </div>
                     <div class="ui-block-c">
                         <div data-role="fieldcontain">
                             <fieldset data-role="controlgroup" data-mini="true">
-                                <label for="textinput3"> </label>
-                                <input id="textinput3"
-                                placeholder="" value="" type="text" />
+                                <input id="ca_targ"    value="" type="text" />
                             </fieldset>
                         </div>
                     </div>
                     <div class="ui-block-d">
                         <div data-role="fieldcontain">
                             <fieldset data-role="controlgroup" data-mini="true">
-                                <label for="textinput4"> </label>
-                                <input id="textinput4"
-                                placeholder="" value="" type="text" />
+                                <input id="ca_treat" value="" type="text" />
                             </fieldset>
                         </div>
                     </div>
                     <div class="ui-block-a">
                         <div>
-                            <b> SO4
-                            <br />
-                            <br />
-                            </b>
+                            <b> SO4 </b>
                         </div>
                     </div>
-                    <div class="ui-block-b"></div>
-                    <div class="ui-block-c"></div>
-                    <div class="ui-block-d"></div>
+                    <div class="ui-block-b">
+                        <div data-role="fieldcontain">
+                            <fieldset data-role="controlgroup" data-mini="true">
+                                <input id="so4_src"  value="" type="text" />
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="ui-block-c">
+                        <div data-role="fieldcontain">
+                            <fieldset data-role="controlgroup" data-mini="true">
+                                <input id="so4_targ"    value="" type="text" />
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="ui-block-d">
+                        <div data-role="fieldcontain">
+                            <fieldset data-role="controlgroup" data-mini="true">
+                                <input id="so4_treat" value="" type="text" />
+                            </fieldset>
+                        </div>
+                    </div>
                     <div class="ui-block-a">
                         <div>
-                            <b> Mg
-                            <br />
-                            <br />
-                            </b>
+                            <b> Mg </b>
                         </div>
                     </div>
-                    <div class="ui-block-b"></div>
-                    <div class="ui-block-c"></div>
-                    <div class="ui-block-d"></div>
-                    <div class="ui-block-a"></div>
-                    <div class="ui-block-b"></div>
-                    <div class="ui-block-c"></div>
-                    <div class="ui-block-d"></div>
-                    <div class="ui-block-a"></div>
-                    <div class="ui-block-b"></div>
-                    <div class="ui-block-c"></div>
-                    <div class="ui-block-d"></div>
+                    <div class="ui-block-b">
+                        <div data-role="fieldcontain">
+                            <fieldset data-role="controlgroup" data-mini="true">
+                                <input id="mg_src"  value="" type="text" />
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="ui-block-c">
+                        <div data-role="fieldcontain">
+                            <fieldset data-role="controlgroup" data-mini="true">
+                                <input id="mg_targ"    value="" type="text" />
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="ui-block-d">
+                        <div data-role="fieldcontain">
+                            <fieldset data-role="controlgroup" data-mini="true">
+                                <input id="mg_treat" value="" type="text" />
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="ui-block-a">
+                        <div>
+                            <b> Na </b>
+                        </div>
+                    </div>
+                    <div class="ui-block-b">
+                        <div data-role="fieldcontain">
+                            <fieldset data-role="controlgroup" data-mini="true">
+                                <input id="na_src"  value="" type="text" />
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="ui-block-c">
+                        <div data-role="fieldcontain">
+                            <fieldset data-role="controlgroup" data-mini="true">
+                                <input id="na_targ"    value="" type="text" />
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="ui-block-d">
+                        <div data-role="fieldcontain">
+                            <fieldset data-role="controlgroup" data-mini="true">
+                                <input id="na_treat" value="" type="text" />
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="ui-block-a">
+                        <div>
+                            <b> Cl </b>
+                        </div>
+                    </div>
+                    <div class="ui-block-b">
+                        <div data-role="fieldcontain">
+                            <fieldset data-role="controlgroup" data-mini="true">
+                                <input id="cl_src"  value="" type="text" />
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="ui-block-c">
+                        <div data-role="fieldcontain">
+                            <fieldset data-role="controlgroup" data-mini="true">
+                                <input id="cl_targ"    value="" type="text" />
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="ui-block-d">
+                        <div data-role="fieldcontain">
+                            <fieldset data-role="controlgroup" data-mini="true">
+                                <input id="cl_treat" value="" type="text" />
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="ui-block-a">
+                        <div>
+                            <b> CO3 </b>
+                        </div>
+                    </div>
+                    <div class="ui-block-b">
+                        <div data-role="fieldcontain">
+                            <fieldset data-role="controlgroup" data-mini="true">
+                                <input id="hco3_src"  value="" type="text" />
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="ui-block-c">
+                        <div data-role="fieldcontain">
+                            <fieldset data-role="controlgroup" data-mini="true">
+                                <input id="hco3_targ"    value="" type="text" />
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="ui-block-d">
+                        <div data-role="fieldcontain">
+                            <fieldset data-role="controlgroup" data-mini="true">
+                                <input id="hco3_treat" value="" type="text" />
+                            </fieldset>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div data-theme="a" data-role="footer" data-position="fixed">
@@ -580,6 +660,7 @@
         <script src="scripts/jquery-1.7.2.min.js"></script>
         <script src="scripts/jquery.mobile-1.1.0.min.js"></script>
         <script src="scripts/beercalcs.js"></script>
+        <script src="scripts/watercalcs.js"></script>
         <script src="scripts/brewbro.js"></script>
     </body>
 </html>

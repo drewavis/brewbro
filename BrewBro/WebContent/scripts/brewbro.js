@@ -4,6 +4,19 @@
  */
 
 // Set up onchange events.  jquery mobile uses doc.init() rather than document.ready()
+
+
+$('#water').live('pageinit', function(event) {
+	// profiles is defined in watercalcs.js:
+	for (p in profiles){
+		$('#water_src').append($("<option />").val(p).text(p));
+		$('#water_targ').append($("<option />").val(p).text(p));
+	};
+
+	
+	
+});
+
 $('#carb').live('pageinit', function(event) {
 /* Carbonation page change events */
 	
