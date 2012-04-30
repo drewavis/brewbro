@@ -1,10 +1,8 @@
 BrewBro
 
-BrewBro is a collection of useful calculators for homebrewers.  It is coded in html5/javascript,
-using jQuery and jQuery mobile.  
+BrewBro is a collection of useful calculators for homebrewers.  It is coded in html5/javascript, using jQuery and jQuery mobile.  
 
-BrewBro is intended to be packaged as a mobile app using phonegap.  Currently, the project settings
-and structure required to build this as a phonegap app is not provided.  I'm working on it.
+BrewBro is intended to be packaged as a mobile app using phonegap.  Currently, the project settings and structure required to build this as a phonegap app is not provided.  I'm working on it.
 
 Current features:
  - Conversion utility (Plato<->SG, F<->C)

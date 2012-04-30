@@ -7,6 +7,13 @@ function water (name){
 	this.salts =  {'MgSO4':0, 'CaSO4':0, 'NaCl':0, 'NaHCO3':0, 'CaCO3':0, 'CaCl2':0}  ;
 }
 
+function updateWater(w, ions){
+	for (i in ions){
+		w.ions[i]=ions[i];
+	}
+	w.treated=w.ions;
+}
+
 function calcTreated(w){
 	for (ion in w.ions){
 		var total=0;

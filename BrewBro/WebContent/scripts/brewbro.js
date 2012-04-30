@@ -5,72 +5,146 @@
 
 // Set up onchange events.  jquery mobile uses doc.init() rather than document.ready()
 
-
 $('#water').live('pageinit', function(event) {
 	// profiles is defined in watercalcs.js:
-	for (p in profiles){
+	for (p in profiles) {
 		$('#water_src').append($("<option />").val(p).text(p));
 		$('#water_targ').append($("<option />").val(p).text(p));
-	};
+	}
+	;
 
-	
-	
-});
-
-$('#carb').live('pageinit', function(event) {
-/* Carbonation page change events */
-	
-	/* change temp if units changes */
-
-	$('input:radio[name=carb_temp_u]').change(function() {
-		var bottle_temp = $('#carb_bottletemp').val();
-		var serv_temp = $('#carb_serv_temp').val();
-		var tempU = $('input:radio[name=carb_temp_u]:checked').val(); 
-
-		if (tempU == 'c') {
-			bottle_temp = fToC(bottle_temp);
-			serv_temp = fToC(serv_temp);
-
-		} else {
-			bottle_temp = cToF(bottle_temp);
-			serv_temp = cToF(serv_temp);
-		}
-		$('#carb_bottletemp').val(Math.round(bottle_temp * 10) / 10);
-		$('#carb_serv_temp').val(Math.round(serv_temp * 10) / 10);
-
+	// set each ion value
+	$('#water_src').change(function() {
+		var w = $('#water_src').val();
+		setIons(w, 'src');
 	});
 	
-	$('input:radio[name=carb_temp_u],#carb_targ_vols, #carb_serv_temp,#carb_sugar, #carb_beervol,#carb_beervol_u ' ).change(function(){
+	$('#water_targ').change(function() {
+		var w = $('#water_targ').val();
+		setIons(w, 'targ');
+	});
+
+	// set both to distilled
+	$("#water_src :option first").attr('selected','selected');
+	$('#water_src').selectmenu("refresh", true);
+	$("#water_targ :option first").attr('selected','selected');
+	$('#water_targ').selectmenu("refresh", true);
+	
+	// calculate 
+	$('#calculate').click(function(){
+		var water_data= $('#water_form').serializeArray();
 		
-		var bottle_temp = $('#carb_bottletemp').val();
-		var serv_temp = $('#carb_serv_temp').val();
-		var tempU = $('input:radio[name=carb_temp_u]:checked').val(); 
-		if (tempU == 'c'){
-			bottle_temp = cToF(bottle_temp);
-			serv_temp = cToF(serv_temp);
+		alert(water_data);
+
+		var ions={};
+		jQuery.each(water_data, function(){
+			if (this.name.indexOf("_src")!=-1){
+				var k = this.name.substring(0,this.name.indexOf("_src"));
+				ions[k]=this.value;
 			}
-		var disolved_co2 = dissolvedCO2(bottle_temp);
-		$('#carb_co2').val(Math.round(disolved_co2 * 10) / 10);
-		
-		var targ_vols =  $('#carb_targ_vols').val();
-		
-		var keg_psi =  kegPSI(serv_temp, targ_vols);
-		$('#carb_kegpsi').val(Math.round(keg_psi * 10) / 10);
-		
-		var sugar_type = $('#carb_sugar').val();
-		var beer_vol = $('#carb_beervol').val();
-		var beer_vol_u = $('#carb_beervol_u').val();
-		
-		beer_vol = convertTo(beer_vol_u,'l',beer_vol);
-		
-		var sugar_g_l = PrimingSugarGL(disolved_co2, targ_vols, sugar_type);
-		var sugar_add = sugar_g_l * beer_vol;
-		$('#carb_sugarg').val(Math.round(sugar_add ));
-				
-		
+	        
+	      });
+
+		alert(ions);
 	});
-	
+
 });
+
+// Call when the target or source drop-down changes:
+function setIons(profile, targ) {
+
+	for ( var key in profiles[profile]) {
+		var inp_id = '#' + key + "_" + targ;
+		$(inp_id).val(profiles[profile][key]);
+	}
+};
+
+$('#carb')
+		.live(
+				'pageinit',
+				function(event) {
+					/* Carbonation page change events */
+
+					/* change temp if units changes */
+
+					$('input:radio[name=carb_temp_u]')
+							.change(
+									function() {
+										var bottle_temp = $('#carb_bottletemp')
+												.val();
+										var serv_temp = $('#carb_serv_temp')
+												.val();
+										var tempU = $(
+												'input:radio[name=carb_temp_u]:checked')
+												.val();
+
+										if (tempU == 'c') {
+											bottle_temp = fToC(bottle_temp);
+											serv_temp = fToC(serv_temp);
+
+										} else {
+											bottle_temp = cToF(bottle_temp);
+											serv_temp = cToF(serv_temp);
+										}
+										$('#carb_bottletemp')
+												.val(
+														Math
+																.round(bottle_temp * 10) / 10);
+										$('#carb_serv_temp')
+												.val(
+														Math
+																.round(serv_temp * 10) / 10);
+
+									});
+
+					$(
+							'input:radio[name=carb_temp_u],#carb_targ_vols, #carb_serv_temp,#carb_sugar, #carb_beervol,#carb_beervol_u ')
+							.change(
+									function() {
+
+										var bottle_temp = $('#carb_bottletemp')
+												.val();
+										var serv_temp = $('#carb_serv_temp')
+												.val();
+										var tempU = $(
+												'input:radio[name=carb_temp_u]:checked')
+												.val();
+										if (tempU == 'c') {
+											bottle_temp = cToF(bottle_temp);
+											serv_temp = cToF(serv_temp);
+										}
+										var disolved_co2 = dissolvedCO2(bottle_temp);
+										$('#carb_co2')
+												.val(
+														Math
+																.round(disolved_co2 * 10) / 10);
+
+										var targ_vols = $('#carb_targ_vols')
+												.val();
+
+										var keg_psi = kegPSI(serv_temp,
+												targ_vols);
+										$('#carb_kegpsi').val(
+												Math.round(keg_psi * 10) / 10);
+
+										var sugar_type = $('#carb_sugar').val();
+										var beer_vol = $('#carb_beervol').val();
+										var beer_vol_u = $('#carb_beervol_u')
+												.val();
+
+										beer_vol = convertTo(beer_vol_u, 'l',
+												beer_vol);
+
+										var sugar_g_l = PrimingSugarGL(
+												disolved_co2, targ_vols,
+												sugar_type);
+										var sugar_add = sugar_g_l * beer_vol;
+										$('#carb_sugarg').val(
+												Math.round(sugar_add));
+
+									});
+
+				});
 
 $('#hydro').live('pageinit', function(event) {
 	/* Hyrdometer page change events */
@@ -108,10 +182,13 @@ $('#hydro').live('pageinit', function(event) {
 	});
 });
 
-$('#yeast').live('pageinit',
+$('#yeast')
+		.live(
+				'pageinit',
 				function(event) {
 					/* Yeast page change events */
-					$( 'input:radio[name=rdo_yeasttype], #yeast_wortvol, #yeast_units, #yeast_og, #yeast_temp')
+					$(
+							'input:radio[name=rdo_yeasttype], #yeast_wortvol, #yeast_units, #yeast_og, #yeast_temp')
 							.change(
 									function() {
 										var type = $(
