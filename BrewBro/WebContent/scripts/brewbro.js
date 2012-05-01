@@ -4,48 +4,85 @@
  */
 
 // Set up onchange events.  jquery mobile uses doc.init() rather than document.ready()
-
 $('#water').live('pageinit', function(event) {
 	// profiles is defined in watercalcs.js:
 	for (p in profiles) {
-		$('#water_src').append($("<option />").val(p).text(p));
-		$('#water_targ').append($("<option />").val(p).text(p));
+		$('#water_source').append($("<option />").val(p).text(p));
+		$('#water_target').append($("<option />").val(p).text(p));
 	}
 	;
 
 	// set each ion value
-	$('#water_src').change(function() {
-		var w = $('#water_src').val();
+	$('#water_source').change(function() {
+		var w = $('#water_source').val();
 		setIons(w, 'src');
 	});
-	
-	$('#water_targ').change(function() {
-		var w = $('#water_targ').val();
-		setIons(w, 'targ');
+
+	$('#water_target').change(function() {
+		var w = $('#water_target').val();
+		setIons(w, 'trg');
 	});
 
 	// set both to distilled
-	$("#water_src :option first").attr('selected','selected');
-	$('#water_src').selectmenu("refresh", true);
-	$("#water_targ :option first").attr('selected','selected');
-	$('#water_targ').selectmenu("refresh", true);
-	
-	// calculate 
-	$('#calculate').click(function(){
-		var water_data= $('#water_form').serializeArray();
-		
-		alert(water_data);
+	$("#water_source :option first").attr('selected', 'selected');
+	$('#water_source').selectmenu("refresh", true);
+	$('#water_source').change();
+	$("#water_target :option first").attr('selected', 'selected');
+	$('#water_target').selectmenu("refresh", true);
+	$('#water_target').change();
 
-		var ions={};
-		jQuery.each(water_data, function(){
-			if (this.name.indexOf("_src")!=-1){
-				var k = this.name.substring(0,this.name.indexOf("_src"));
-				ions[k]=this.value;
+	// calculate
+	$('#calculate').click(function() {
+		var water_data = $('#water_form').serializeArray();
+
+		var src_ions = {};
+		var targ_ions = {};
+		jQuery.each(water_data, function() {
+			if (this.name.indexOf("_src") != -1) {
+				var k = this.name.substring(0, this.name.indexOf("_src"));
+				src_ions[k] = this.value;
+			} else if (this.name.indexOf("_trg") != -1) {
+				var k = this.name.substring(0, this.name.indexOf("_trg"));
+				targ_ions[k] = this.value;
 			}
-	        
-	      });
 
-		alert(ions);
+		});
+		// get vol and convert to gal
+		var vol = $('#water_vol').val();
+		var vol_u = $('#water_vol_u').val();
+		vol = convertTo(vol_u,'gal',vol);
+
+		var src_water = new water();
+		var targ_water = new water();
+		updateWater(src_water, src_ions);
+		updateWater(targ_water, targ_ions);
+		var res = calcWater(targ_water, src_water, vol);
+
+		// result is array of : treated water, tsp, dilution vol
+		var treat_water = res[0];
+		var salt_tsp = res[1];
+		var dil_vol = res[2];
+
+		for (ion in treat_water.treated) {
+			var t_id = '#' + ion + "_treat";
+			$(t_id).val(Math.round(treat_water.treated[ion]*10)/10);
+		}
+
+		for (salt in treat_water.salts){
+			var t_id='#'+salt;
+			$(t_id).val(Math.round(treat_water.salts[salt]*10)/10);
+		}
+		for (salt in salt_tsp) {
+			var salt_id = '#' + salt + "tsp";
+			$(salt_id).val(Math.round(salt_tsp[salt]*10)/10);
+		}
+
+		// convert dil vol from gal to target units:
+		dil_vol = convertTo('gal',vol_u,dil_vol);
+		$('#dilute_vol').val(Math.round(dil_vol*10)/10);
+
+		console.log(res);
+
 	});
 
 });
