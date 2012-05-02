@@ -2,15 +2,20 @@
  * Functions using jquery to handle change events on the brewbro UI.
  * Supporting calculations are in beercalcs.js.
  */
+"use strict";
+// try turning off transitions to speed performance
+$(document).bind("mobileinit", function(){
+  $.mobile.defaultPageTransition="none";
+  
+});
 
 // Set up onchange events.  jquery mobile uses doc.init() rather than document.ready()
 $('#water').live('pageinit', function(event) {
 	// profiles is defined in watercalcs.js:
-	for (p in profiles) {
+	for (var p in profiles) {
 		$('#water_source').append($("<option />").val(p).text(p));
 		$('#water_target').append($("<option />").val(p).text(p));
-	}
-	;
+	};
 
 	// set each ion value
 	$('#water_source').change(function() {
@@ -24,12 +29,10 @@ $('#water').live('pageinit', function(event) {
 	});
 
 	// set both to distilled
-	$("#water_source :option first").attr('selected', 'selected');
-	$('#water_source').selectmenu("refresh", true);
-	$('#water_source').change();
-	$("#water_target :option first").attr('selected', 'selected');
-	$('#water_target').selectmenu("refresh", true);
-	$('#water_target').change();
+	$("#water_source, #water_target :option first").attr('selected', 'selected');
+	$('#water_source, #water_target').selectmenu("refresh", true);
+	$('#water_source, #water_target').change();
+
 
 	// calculate
 	$('#calculate').click(function() {
@@ -63,16 +66,16 @@ $('#water').live('pageinit', function(event) {
 		var salt_tsp = res[1];
 		var dil_vol = res[2];
 
-		for (ion in treat_water.treated) {
+		for (var ion in treat_water.treated) {
 			var t_id = '#' + ion + "_treat";
 			$(t_id).val(Math.round(treat_water.treated[ion]*10)/10);
 		}
 
-		for (salt in treat_water.salts){
+		for (var salt in treat_water.salts){
 			var t_id='#'+salt;
 			$(t_id).val(Math.round(treat_water.salts[salt]*10)/10);
 		}
-		for (salt in salt_tsp) {
+		for (var salt in salt_tsp) {
 			var salt_id = '#' + salt + "tsp";
 			$(salt_id).val(Math.round(salt_tsp[salt]*10)/10);
 		}

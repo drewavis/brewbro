@@ -23,36 +23,36 @@
             <div data-role="content">
                 <ul data-role="listview" data-divider-theme="b" data-inset="true">
                     <li data-role="list-divider" role="heading">
-                        Divider
+                        Tools
                     </li>
                     <li data-theme="c">
-                        <a href="#convert" data-transition="slide"> Convert </a>
+                        <a href="#convert" data-transition="none"> Convert </a>
                     </li>
                     <li data-theme="c">
-                        <a href="#hydro" data-transition="slide"> Hydrometer </a>
+                        <a href="#hydro" data-transition="none"> Hydrometer </a>
                     </li>
                     <li data-theme="c">
-                        <a href="#refract" data-transition="slide"> Refractometer </a>
+                        <a href="#refract" data-transition="none"> Refractometer </a>
                     </li>
                     <li data-theme="c">
-                        <a href="#yeast" data-transition="slide"> Yeast </a>
+                        <a href="#yeast" data-transition="none"> Yeast </a>
                     </li>
                     <li data-theme="c">
-                        <a href="#carb" data-transition="slide"> Carbonation </a>
+                        <a href="#carb" data-transition="none"> Carbonation </a>
                     </li>
                     <li data-theme="c">
-                        <a href="#water" data-transition="slide"> Water </a>
+                        <a href="#water" data-transition="none"> Water </a>
                     </li>
                     <li data-role="list-divider" role="heading">
-                        Divider
+                        Info
                     </li>
                     <li data-theme="c">
-                        <a href="#about" data-transition="slide"> About </a>
+                        <a href="#about" data-transition="none"> About </a>
                     </li>
                 </ul>
             </div>
             <div data-theme="a" data-role="footer" data-position="fixed">
-                <h2>Footer</h2>
+                <ht>ver 0.1</h2>
             </div>
         </div>
         <!-- Conversion Page -->
@@ -773,6 +773,22 @@
                 <h3>Footer</h3>
             </div>
         </div>
+       <!-- About -->
+       
+        <div data-role="page" id="about">
+            <div data-theme="a" data-role="header">
+                <h3>About</h3>
+                <a data-role="button" data-transition="fade" href="#main_page"
+                data-icon="arrow-l" data-iconpos="left"> Back </a>
+            </div>
+            <div data-role="content">
+                <p>BrewBro is a set of useful tools for the homebrewer, packaged in a
+                    convenient mobile app.</p>
+                    <p>BrewBro is built with jQuery/jQuery Mobile + HTML5, packaged with
+                        PhoneGap.  The source is available on GitHub.</p>
+            </div>
+        </div>
+       
         <!-- For local/PhoneGap -->
         <script src="scripts/jquery-1.7.2.min.js"></script>
         <script src="scripts/jquery.mobile-1.1.0.min.js"></script>

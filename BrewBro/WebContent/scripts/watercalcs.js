@@ -1,5 +1,5 @@
 /* water calculations */
-
+"use strict";
 function water (name){
 	this.ions={'ca':0, 'mg':0, 'na':0, 'so4':0, 'hco3':0, 'cl':0, };
 	if(name in profiles){ this.ions= profiles[name];}
@@ -8,16 +8,16 @@ function water (name){
 }
 
 function updateWater(w, ions){
-	for (i in ions){
+	for (var i in ions){
 		w.ions[i]=ions[i];
 	}
 	w.treated=w.ions;
 }
 
 function calcTreated(w){
-	for (ion in w.ions){
+	for (var ion in w.ions){
 		var total=0;
-		for (salt in salts){
+		for (var salt in salts){
 			if (ion in salts[salt]['effect']){
 				total += salts[salt]['effect'][ion] * w.salts[salt];
 			}			
@@ -27,8 +27,8 @@ function calcTreated(w){
 }
 
 function rms(w1, w2){
-    r = 0;
-    for (key in w1.treated){
+    var r = 0;
+    for (var key in w1.treated){
     	r += Math.pow(w1.treated[key] - w2.treated[key], 2);
     }
     r = Math.sqrt(r);
@@ -47,7 +47,7 @@ function randWater(w, s, amount){
 function permute(w,amount){
 	// requires jquery:
 	var w2 = jQuery.extend(true, {}, w);
-	for (salt in w2.salts){
+	for (var salt in w2.salts){
 		randWater(w2,salt,amount);
 	}
 	calcTreated(w2);
@@ -106,7 +106,7 @@ function anneal(target_water, start_water, max_evaluations, start_temp, alpha){
 
     var done = false;
     while (!done){
-    	temperature = cooling_schedule.next();
+    	var temperature = cooling_schedule.next();
         
         for (var i=0;i<1000;i++){            
         	num_evaluations += 1;
@@ -124,7 +124,7 @@ function anneal(target_water, start_water, max_evaluations, start_temp, alpha){
                 
             // probablistically accept this solution
             // always accepting better solutions
-            p = P(current_score, next_score, temperature);
+           var  p = P(current_score, next_score, temperature);
             if (Math.random() < p){
                 current = next;
                 current_score = next_score;
@@ -142,7 +142,7 @@ function anneal(target_water, start_water, max_evaluations, start_temp, alpha){
 function calcWater(target_water, source_water, vol){
     // first compare the waters to determine required dilution
     var dilution = 0;   // in %
-    for (ion in target_water.ions){
+    for (var ion in target_water.ions){
         if (source_water.ions[ion] > target_water.ions[ion] && (1 - (target_water.ions[ion] / source_water.ions[ion]) > dilution)){
             dilution = 1 - (target_water.ions[ion] / source_water.ions[ion]);
         };
@@ -163,7 +163,7 @@ function calcWater(target_water, source_water, vol){
     // we have the gr of salt per gal, lets multiply by vol to get real amount,
     // plus calc the tsp of each:
     var salttsp = jQuery.extend(true, {}, res.salts);
-    for (salt in res.salts){
+    for (var salt in res.salts){
         res.salts[salt] *= vol;
         salttsp[salt] = res.salts[salt] / salts[salt]['gPerTsp'];
     }

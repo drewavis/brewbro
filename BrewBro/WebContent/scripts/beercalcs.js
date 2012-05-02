@@ -1,6 +1,7 @@
 /* Beercalcs script - an interesting collection of homebrewing-related
  * calculations.
  */
+"use strict";
 
 function cToF(tempC) {
 	return (((tempC * 9) / 5) + 32);
@@ -12,7 +13,7 @@ function fToC(tempF) {
 
 // this makes iterating functions cleaner:
 function cfTocf(unit, temp) {
-	if (unit == "C") {
+	if (unit === "C") {
 		return fToC(temp);
 	} else {
 		return cToF(temp);
@@ -90,7 +91,7 @@ function kegPSI(Temp, VolsCO2) {
 	return PSI;
 }
 
-sugars = {
+var sugars = {
 	'dextrose' : 1.15,
 	'honey' : 1.40,
 	'maplesyrup' : 1.50,
