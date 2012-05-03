@@ -3,11 +3,7 @@
  * Supporting calculations are in beercalcs.js.
  */
 "use strict";
-// try turning off transitions to speed performance
-$(document).bind("mobileinit", function(){
-  $.mobile.defaultPageTransition="none";
-  
-});
+
 
 // Set up onchange events.  jquery mobile uses doc.init() rather than document.ready()
 $('#water').live('pageinit', function(event) {
