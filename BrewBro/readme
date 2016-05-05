@@ -1,4 +1,4 @@
-BrewBro
+# BrewBro
 
 BrewBro is a collection of useful calculators for homebrewers.  It is coded in html5/javascript, using jQuery and jQuery mobile.  
 
@@ -17,3 +17,5 @@ Future features:
  - Hop bitterness
  - Mash schedule
  - StrangeBrew Online recipe viewer
+ 
+ Live preview: <a href="https://rawgit.com/drewavis/brewbro/master/BrewBro/WebContent/index.html">preview</a>
